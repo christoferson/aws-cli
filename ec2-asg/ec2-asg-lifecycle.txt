@@ -1,5 +1,9 @@
 Specify SNS Topic as EC2 ASG Lifecycle Event Listener
+You can only specify the destination SNS or SQS using CLI. Not available in the web console.
 
+Reference: https://docs.aws.amazon.com/cli/latest/reference/autoscaling/put-lifecycle-hook.html
+
+Command:
  aws autoscaling put-lifecycle-hook ^
  --lifecycle-hook-name my-lifecycle-hook-terminate ^
  --auto-scaling-group-name XXXXXScalingGroup-XXX ^
