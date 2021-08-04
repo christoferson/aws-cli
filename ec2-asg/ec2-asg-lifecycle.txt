@@ -1,0 +1,16 @@
+Specify SNS Topic as EC2 ASG Lifecycle Event Listener
+
+ aws autoscaling put-lifecycle-hook ^
+ --lifecycle-hook-name my-lifecycle-hook-terminate ^
+ --auto-scaling-group-name XXXXXScalingGroup-XXX ^
+ --lifecycle-transition autoscaling:EC2_INSTANCE_TERMINATING ^
+ --notification-target-arn arn:aws:sns:us-east-1:XXXX:XXXTopic ^
+ --role-arn arn:aws:iam::XXXXX:role/XXXXXEventListenerRole ^
+ --heartbeat-timeout 30 ^
+ --default-result CONTINUE
+
+ 
+ 
+ 
+ 
+ \ ^
