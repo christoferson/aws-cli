@@ -1,0 +1,3 @@
+Generate pre-signed URL to allow access for limited time
+
+aws s3 presign --expires-in 120 s3://<bucket>/<object>
