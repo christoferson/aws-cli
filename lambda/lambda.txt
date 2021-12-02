@@ -13,11 +13,29 @@ aws lambda create-function --function-name my-function \
 --role arn:aws:iam::123456789012:role/lambda-ex
 
 ## Invoke Function
-aws lambda invoke --function-name my-function out --log-type Tail \
---query 'LogResult' --output text |  base64 -d
+aws lambda invoke --function-name basic-lambda-zip out --qualifier prd --region eu-west-1
+aws lambda invoke --function-name basic-lambda-zip out --qualifier prd --region eu-west-1 --log-type Tail --query 'LogResult' --output text  |  base64 -d
 
 ## Get Function
-aws lambda get-function --function-name my-function
+aws lambda get-function --function-name basic-lambda-zip --region eu-west-1
 
 ## Delete Function
 aws lambda delete-function --function-name my-function
+
+
+## Create Function (Image)
+aws lambda create-function --region sa-east-1 --function-name my-function \
+    --package-type Image  \
+    --code ImageUri=<ECR Image URI>   \
+    --role arn:aws:iam::123456789012:role/lambda-ex 
+    
+## Update Function (Image)
+aws lambda update-function-code --region sa-east-1 --function-name my-function \
+    --image-uri <ECR Image URI>   \
+
+aws lambda update-function-configuration  --function-name my-function \
+--image-config '{"EntryPoint": ["/usr/bin/npx", "aws-lambda-ric"],  \
+                 "Command":   ["app.handler"] ,          \
+                  "WorkingDirectory": "/var/task"}'  
+                  
+                      
