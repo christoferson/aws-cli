@@ -1,0 +1,33 @@
+
+Attaching volumes to a Linux instance
+
+lsblk
+The lsblk (list block) command lists information about all available block devices attached to an instance.
+
+sudo file -s /dev/xvdf
+The file -s command identifies if the volume has a file system.
+If the output simply shows "data" then there is no file system on the device.
+ 
+sudo mkfs -t xfs /dev/xvdf
+The mkfs (make file system) command creates a file system in Linux. 
+mkfs -t command to create a file system of a specific type (-t = type). 
+  
+sudo mkdir /datadirectory
+Use the mkdir command to create a mount point directory for the volume. The mount point is where the volume is located in the file system tree, and where you read and write files to after you mount the volume.
+ 
+sudo mount /dev/xvdf /data
+The mount command attaches the file system on your new EBS volume to the file tree, which is the hierarchy of directories on the instance.
+ 
+sudo blkid 
+The blkid (block ID) command identifies the 128-bit universally unique identifier (UUID) of the device. 
+Use the blkid command to identify the UUID, and make a note of the UUID of the device that you want to mount after reboot. 
+Then add the UUID to the /etc/fstab file. (See the following item for for an explanation of the /etc/fstab file.)
+Device names can change, but the UUID persists throughout the life of the partition. 
+By using the UUID, you reduce the chances that the system becomes unbootable after a hardware reconfiguration.
+
+sudo vim /etc/fstab
+Use the /etc/fstab file to automatically mount a volume after reboot.
+To mount an attached EBS volume on every system reboot, add an entry for the device to the /etc/fstab file. 
+You can use the device name, such as /dev/xvdf, but using the device's 128-bit universally unique identifier (UUID) is the recommended method. 
+
+UUID=80b496fa-ce2d-4dcf-9afc-bcaa731a67f1 /dev/xvdf xfs    defaults   0      2
