@@ -1,0 +1,20 @@
+
+Send Message | https://docs.aws.amazon.com/cli/latest/reference/sqs/send-message.html
+
+
+  send-message
+--queue-url <value>
+--message-body <value>
+[--delay-seconds <value>]
+[--message-attributes <value>]
+[--message-system-attributes <value>]
+[--message-deduplication-id <value>]
+[--message-group-id <value>]
+[--cli-input-json <value>]
+[--generate-cli-skeleton <value>]
+
+aws --region us-west-2 sqs send-message --queue-url https://sqs.us-west-2.amazonaws.com/xxxxxxxxxxxx/test-que --message-body "message 02" --message-group-id A
+
+Receive Message
+aws --region us-west-2 sqs receive-message --queue-url https://sqs.us-west-2.amazonaws.com/xxxxxxxxxxxx/test-que
+
